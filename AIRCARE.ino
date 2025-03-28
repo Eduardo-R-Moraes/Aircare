@@ -1,4 +1,4 @@
-/* libraries */
+/* libs */
 #include "DHT.h"
 
 
@@ -11,6 +11,7 @@
 /* variables */
 DHT dht(DHTPIN, DHTTYPE);
 float humidity;
+float humidityGoal;
 
 
 void setup() {
@@ -18,14 +19,14 @@ void setup() {
   Serial.println("DHT11 test!");
 
   pinMode(RELEPIN, OUTPUT);
-
-  dht.begin();
 }
 
 void loop() {
   delay(2000);
+  humidityGoal = 50;
   humidity = dht.readHumidity();
 
+  /* Humidity reading */
   if(isnan(humidity)) {
     Serial.println("DHT not working!");
   }
@@ -35,7 +36,8 @@ void loop() {
     Serial.println("%");
   }
 
-  if(humidity > 50) {
+  /* Rele logic */
+  if(humidity < humidityGoal) {
     digitalWrite(RELEPIN, HIGH);
   }
 
