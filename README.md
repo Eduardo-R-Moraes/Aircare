@@ -8,7 +8,6 @@ Este projeto utiliza um ESP32 para monitorar a umidade ambiente por meio do sens
 - **Sensor DHT11**: para medir a umidade e temperatura do ambiente.
 - **Módulo Relé**: para controlar o acionamento do umidificador.
 - **Umidificador**: aparelho que será controlado pelo relé.
-- **Resistor de 10kΩ**: utilizado como pull-up para o pino de dados do DHT11.
 - **Protoboard e Jumpers**: para montagem dos circuitos.
 - **Fonte de Alimentação**: adequada para o ESP32 e o umidificador.
 
@@ -17,7 +16,7 @@ Este projeto utiliza um ESP32 para monitorar a umidade ambiente por meio do sens
 1. **Conexão do Sensor DHT11**:
    - **VCC**: conectar ao pino de 3.3V do ESP32.
    - **GND**: conectar ao GND do ESP32.
-   - **DATA**: conectar ao pino GPIO 2 do ESP32, com um resistor de 10kΩ entre o pino DATA e o VCC para atuar como pull-up.
+   - **DATA**: conectar ao pino GPIO 2 do ESP32.
 
 2. **Conexão do Módulo Relé**:
    - **VCC**: conectar ao pino de 5V do ESP32.
