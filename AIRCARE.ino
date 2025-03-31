@@ -3,7 +3,7 @@
 
 
 /* constants */
-#define DHTPIN 2
+#define DHTPIN 5
 #define DHTTYPE DHT11
 #define RELEPIN 4
 
@@ -11,6 +11,7 @@
 /* variables */
 DHT dht(DHTPIN, DHTTYPE);
 float humidity;
+float temperature;
 float humidityGoal;
 
 
@@ -22,26 +23,29 @@ void setup() {
 }
 
 void loop() {
-  delay(2000);
-  humidityGoal = 50;
+  delay(3000);
+  humidityGoal = 60;
   humidity = dht.readHumidity();
+  temperature = dht.readTemperature();
 
   /* Humidity reading */
-  if(isnan(humidity)) {
-    Serial.println("DHT not working!");
+  if(isnan(humidity) || isnan(temperature) || humidity > 95) {
+    Serial.println("DHT failed!");
   }
 
   else {
     Serial.print(humidity);
-    Serial.println("%");
+    Serial.print("%\t");
+    Serial.print(temperature);
+    Serial.println("°C");
   }
 
   /* Rele logic */
   if(humidity < humidityGoal) {
-    digitalWrite(RELEPIN, HIGH);
+    digitalWrite(RELEPIN, LOW);
   }
 
   else {
-    digitalWrite(RELEPIN, LOW);
+    digitalWrite(RELEPIN, HIGH);
   }
 }
